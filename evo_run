@@ -1,2 +1,22 @@
 #!/bin/bash
-apptainer run --nv evo.sif
+# apptainer run --nv evo.sif
+
+#scratch_dir=/n/scratch/users/n/aaw10
+scratch_dir=$APPTAINER_CACHEDIR
+repo_dir=/home/andreas/gitrepos/evo
+
+apptainer run \
+    --compat \
+    --containall \
+    --no-init \
+    --no-umask \
+    --no-eval \
+    --nv \
+    --fakeroot \
+    --bind "$(pwd)":/workspace \
+    --bind $scratch_dir/huggingface-cache:/huggingface-cache \
+    --bind $scratch_dir/nim-cache:/opt/nim/.cache \
+    --bind /tmp:/tmp \
+    --env "HF_HOME=/huggingface-cache" \
+    --env "NGC_API_KEY=$APPTAINER_DOCKER_PASSWORD" \
+    $repo_dir/evo2-40b_1.sif
