@@ -1,0 +1,13 @@
+#!/bin/bash -x
+set -x
+srun \
+	-p gpu_requeue \
+	--account=ccb \
+	-c 8 \
+	-t 0-5:00 \
+	--pty \
+	--mem 64G \
+	--gres=gpu:l40s:2 \
+	--tunnel 7485:7485 \
+	/bin/bash
+set +x
