@@ -1,9 +1,8 @@
 #!/bin/bash
 # apptainer run --nv evo.sif
 
-#scratch_dir=/n/scratch/users/n/aaw10
-scratch_dir=$APPTAINER_CACHEDIR
-repo_dir=/home/andreas/gitrepos/evo
+scratch_dir=/n/scratch/users/a/aaw10
+container_dir=/n/data1/hms/ccb/resources
 
 apptainer run \
     --compat \
@@ -19,4 +18,4 @@ apptainer run \
     --bind /tmp:/tmp \
     --env "HF_HOME=/huggingface-cache" \
     --env "NGC_API_KEY=$APPTAINER_DOCKER_PASSWORD" \
-    $repo_dir/evo2-40b_1.sif
+    $container_dir/evo2-40b_1.sif
