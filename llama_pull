@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export APPTAINER_CACHEDIR="/home/andreas/data/apptainer"
+export APPTAINER_DOCKER_USERNAME='$oauthtoken'
+
+# NVIDIA API KEY
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs | envsubst)
+fi
+
+export APPTAINER_DOCKER_PASSWORD=$NGC_API_KEY
+
+apptainer pull docker://nvcr.io/nim/meta/llama-3.2-1b-instruct:1.8
