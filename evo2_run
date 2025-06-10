@@ -1,0 +1,16 @@
+#!/bin/bash
+
+export APPTAINER_CACHEDIR="/n/scratch/users/a/aaw10/apptainer"
+export NIM_CACHEDIR="$APPTAINER_CACHEDIR/nim"
+export SIF_DIR="/n/app/singularity/containers/aaw10"
+
+# NVIDIA API KEY
+if [ -f .env ]; then
+  export $(grep -v '^#' .env | xargs | envsubst)
+fi
+
+apptainer run \
+    --nv \
+    --bind $NIM_CACHEDIR:/opt/nim/.cache \
+    --env NGC_API_KEY=$NGC_API_KEY \
+    $SIF_DIR/evo2-40b_1.sif
