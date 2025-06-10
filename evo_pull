@@ -1,3 +1,0 @@
-#!/bin/bash
-export APPTAINER_CACHEDIR=/home/andreas/data/apptainer
-apptainer pull docker://nvcr.io/nim/arc/evo2-40b:1
